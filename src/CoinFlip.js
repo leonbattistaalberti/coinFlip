@@ -6,7 +6,7 @@ export default class CoinFlip extends Component {
   static defaultProps = {
     coins: [
       {
-        side: 'heads',
+        side: 'head',
         imgSrc: 'https://qph.fs.quoracdn.net/main-qimg-57e97e36918b359f28e86b8cbf567436.webp',
       },
       {
@@ -24,7 +24,7 @@ export default class CoinFlip extends Component {
       nHeads: 0,
       nTails: 0,
     };
-    this.handleClick = this.handleClick.bind(this);
+    this.handleClick = this.handleClick.bind (this);
   }
 
   flipCoin () {
@@ -33,6 +33,8 @@ export default class CoinFlip extends Component {
       return {
         currCoin: newCoin,
         nFlips: st.nFlips + 1,
+        nHeads: st.nHeads + (newCoin.side === 'head' ? 1 : 0),
+        nTails: st.nTails + (newCoin.side === 'tail' ? 1 : 0),
       };
     });
   }
@@ -45,8 +47,20 @@ export default class CoinFlip extends Component {
     return (
       <div>
         <h1>Welcome to Coin Flip</h1>
-        {this.state.currCoin !=null && <Coin img={this.state.currCoin} />}
-        <h4>Number of Flips {this.state.nFlips}</h4>
+        {this.state.currCoin != null && <Coin img={this.state.currCoin} />}
+        <h4>
+          Number of Flips:
+          {' '}
+          {this.state.nFlips}
+          {' '}
+          Number of Head:
+          {' '}
+          {this.state.nHeads}
+          {' '}
+          Number of Tails:
+          {' '}
+          {this.state.nTails}
+        </h4>
         <div>
           <button onClick={this.handleClick}>Flip</button>
         </div>
