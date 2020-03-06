@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {choice} from './choice';
+import Coin from './Coin';
 
 export default class CoinFlip extends Component {
   static defaultProps = {
@@ -23,7 +24,7 @@ export default class CoinFlip extends Component {
       nHeads: 0,
       nTails: 0,
     };
-    this.handleClick = this.handleClick.bind (this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   flipCoin () {
@@ -32,13 +33,11 @@ export default class CoinFlip extends Component {
       return {
         currCoin: newCoin,
         nFlips: st.nFlips + 1,
-        nHeads: st.nHeads + 1,
-        nTails: st.nTails + 1,
       };
     });
   }
 
-  handleClick () {
+  handleClick (e) {
     this.flipCoin ();
   }
 
@@ -46,10 +45,8 @@ export default class CoinFlip extends Component {
     return (
       <div>
         <h1>Welcome to Coin Flip</h1>
-        {this.state.currCoin != null
-          ? <img src={this.state.currCoin.imgSrc} alt="Coin" />
-          : <h1>Click Flip</h1>}
-
+        {this.state.currCoin !=null && <Coin img={this.state.currCoin} />}
+        <h4>Number of Flips {this.state.nFlips}</h4>
         <div>
           <button onClick={this.handleClick}>Flip</button>
         </div>
